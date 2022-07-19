@@ -37,6 +37,7 @@ namespace Dataplace.Imersao.Core.Domain.Orcamentos
         public OrcamentoValidade Validade { get; private set; }
         public OrcamentoTabelaPreco TabelaPreco { get; private set; }
         public DateTime? DtFechamento { get; private set; }
+        public DateTime? DDtcancelamento { get; private set; }
         public OrcamentoVendedor Vendedor { get; private set; }
         public string Usuario { get; private set; }
         public OrcamentoStatusEnum Situacao { get; private set; }
@@ -52,13 +53,35 @@ namespace Dataplace.Imersao.Core.Domain.Orcamentos
             DtFechamento = DateTime.Now.Date;
         }
 
-        public void ReabrirOrcamento()
+     
+        public void insereitens(Orcamento item)
+        {
+            item.add(item);
+        }
+
+        private void add(Orcamento item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AbrirOrcamento()
         {
             if (Situacao == OrcamentoStatusEnum.Aberto)
-                throw new DomainException("Orçamento já está fechado!");
+                throw new DomainException("Orçamento já está Aberto!");
 
             Situacao = OrcamentoStatusEnum.Aberto;
             DtFechamento = null;
+        }
+
+        
+        public void CancelarOrcamento()
+        {
+
+            if (Situacao == OrcamentoStatusEnum.Cancelado)
+                throw new DomainException("Orçamento já está cancelado");
+
+            Situacao = OrcamentoStatusEnum.Cancelado;
+            DDtcancelamento = DateTime.Now.Date;
         }
 
         public void DefinirValidade(int diasValidade)

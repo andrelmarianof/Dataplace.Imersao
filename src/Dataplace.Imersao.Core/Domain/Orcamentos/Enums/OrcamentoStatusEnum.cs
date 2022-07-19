@@ -9,7 +9,9 @@ namespace Dataplace.Imersao.Core.Domain.Orcamentos.Enums
     public enum OrcamentoStatusEnum
     {
         Aberto,
-        Fechado
+        Fechado,
+ 
+        Cancelado
     }
 
     public static class OrcamentoStatusEnumExtensions
@@ -20,13 +22,14 @@ namespace Dataplace.Imersao.Core.Domain.Orcamentos.Enums
         }
         public static OrcamentoStatusEnum ToOrcamentoStatusEnum(this string value)
         {
-            if (string.IsNullOrEmpty(value))
+            if (value == "F")
                 return OrcamentoStatusEnum.Aberto;
-
-            if (value == "P")
-                return OrcamentoStatusEnum.Fechado;
             else
-                return OrcamentoStatusEnum.Aberto;
+            return OrcamentoStatusEnum.Cancelado;
+            if (value == "P")
+            return OrcamentoStatusEnum.Fechado;
+            else
+                return OrcamentoStatusEnum.Cancelado;
         }
     }
 }

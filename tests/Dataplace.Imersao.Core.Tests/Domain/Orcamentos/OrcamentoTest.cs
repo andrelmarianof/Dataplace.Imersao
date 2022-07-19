@@ -52,9 +52,23 @@ namespace Dataplace.Imersao.Core.Tests.Domain.Orcamentos
             Assert.Equal(Core.Domain.Orcamentos.Enums.OrcamentoStatusEnum.Fechado, orcamento.Situacao);
             Assert.NotNull(orcamento.DtFechamento);
         }
-
-
         [Fact]
+        public void VerificarCancelado()
+        {
+            // Arrange
+            var orcamento = _fixture.NovoOrcamento();
+
+
+            // Act
+            orcamento.CancelarOrcamento();
+
+
+            // Assert
+            Assert.Equal(Core.Domain.Orcamentos.Enums.OrcamentoStatusEnum.Cancelado, orcamento.Situacao);
+            Assert.NotNull(orcamento.DDtcancelamento);
+        }
+
+
         public void TentarFecharOrcamentoJaFechadoRetornarException()
         {
             // arrange
